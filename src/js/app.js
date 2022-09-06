@@ -10,7 +10,7 @@
 
 // console.log('app.js included');
 
-import { CardFormValidator } from './widget';
+import CardFormValidator from './widget';
 
 const container = document.querySelector('.container');
 const form = new CardFormValidator(container);

@@ -1,20 +1,30 @@
-export class CardDefinition {
+export default class CardDefinition {
   constructor(inputNo) {
     this.inputNo = inputNo;
-    this.cards = document.querySelectorAll('.card');
-    this.amex = document.querySelector('.amex');
-    this.mir = document.querySelector('.mir');
   }
 
   definition() {
-    Array.from(this.cards).forEach((item) => item.classList.add('invalidCard'));
+    const firstNumber = this.inputNo.slice(0, 2);
 
-    if (this.inputNo.length == 15 && (this.inputNo.slice(0, 2) == 34 || this.inputNo.slice(0, 2) == 37)) {
-      this.amex.classList.remove('invalidCard');
-    }
-    if (this.inputNo.length == 16 && (this.inputNo.slice(0, 4) == 2200 || this.inputNo.slice(0, 4) == 2201
-        || this.inputNo.slice(0, 4) == 2202 || this.inputNo.slice(0, 4) == 2203 || this.inputNo.slice(0, 4) == 2204)) {
-      this.mir.classList.remove('invalidCard');
+    switch (firstNumber) {
+      case '40':
+        return 'visa';
+      case '20':
+        return 'mir';
+      case '50':
+        return 'master';
+      case '60':
+        return 'discover';
+      case '30':
+        return 'diner_club';
+      case '35':
+        return 'jcb';
+      case '37':
+        return 'amex';
+      case '34':
+        return 'amex';
+      default:
+        return 'the card is not in the system';
     }
   }
 }
