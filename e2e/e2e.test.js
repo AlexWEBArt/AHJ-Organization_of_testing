@@ -33,13 +33,8 @@ describe('Credit Card Validator form', () => {
     server.kill();
   });
 
-  test('should add do something', async () => {
+  test('Should valid card number', async () => {
     await page.goto(baseUrl);
-
-    // jest.setTimeout(20000);
-    // await page.goto('http://localhost:8888');
-
-    // await page.waitFor('.form-inline');
 
     const form = await page.$('.form-inline');
     const input = await form.$('.form-control');
@@ -48,13 +43,19 @@ describe('Credit Card Validator form', () => {
     await input.type('371449635398431');
     await submit.click();
 
-    const status = await input.getProperty('className');
-    expect(status._remoteObject.value).toBe('form-control valid');
+    await page.waitForSelector('.form-inline .valid');
+  });
 
-    // const status = await input.className
-    // expect(status === 'form-control valid').toBe(true);
+  test('Should invalid card number', async () => {
+    await page.goto(baseUrl);
 
+    const form = await page.$('.form-inline');
+    const input = await form.$('.form-control');
+    const submit = await form.$('.btn');
 
-    // await page.waitFor('.form-inline .valid');
+    await input.type('201449635398432');
+    await submit.click();
+
+    await page.waitForSelector('.form-inline .invalid');
   });
 });

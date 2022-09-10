@@ -4,14 +4,17 @@ export default class CardDefinition {
   }
 
   definition() {
-    const firstNumber = this.inputNo.slice(0, 2);
-
+    let firstNumber = this.inputNo.slice(0, 2);
+    if (firstNumber[0] === '4' || firstNumber[0] === '2' || firstNumber[0] === '5') {
+      /* eslint-disable prefer-destructuring */
+      firstNumber = firstNumber[0];
+    }
     switch (firstNumber) {
-      case '40':
+      case '4':
         return 'visa';
-      case '20':
+      case '2':
         return 'mir';
-      case '50':
+      case '5':
         return 'master';
       case '60':
         return 'discover';
